@@ -1,0 +1,7 @@
+{
+  "name": "Split With Me",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

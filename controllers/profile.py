@@ -10,11 +10,10 @@ from sanic.views import HTTPMethodView
 class ProfileController(HTTPMethodView):
     """User Profile API."""
 
-    def get(self: Self, request: Request) -> None:
-        """Get Profile.
+    async def get(self: Self, request: Request) -> None:
+        """Get Profile."""
+        return json({"status": True})
 
-        Args:
-        ----
-            request (Request): Sanic Request
-        """
+    async def post(self: Self, request: Request) -> None:
+        """Update Profile."""
         return json({"status": True})

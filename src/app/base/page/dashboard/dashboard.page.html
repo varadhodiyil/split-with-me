@@ -1,0 +1,64 @@
+<div class="bg-blend-darken mt-3 mx-4 scrollable">
+  <ion-segment [value]="currentTab">
+    <ion-segment-button [value]="tabs.FRIENDS" (click)="switchTab()">
+      <ion-label>Friends</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [value]="tabs.GROUPS" (click)="switchTab()">
+      <ion-label>Groups</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="list" *ngFor="let friend of sort(friends, 'first_name')">
+    <div
+      [routerLink]="['/detail/friend', friend.id]"
+      class="grid grid-cols-4 cursor-pointer grid-flow-row gap-2 text-sm dark:bg-slate-800 my-4 py-3 rounded-sm border border-slate-200 dark:border-slate-700"
+      *ngIf="friend.balance.length > 0 "
+    >
+      <div class="flex justify-center">
+        <img
+          class="rounded-full w-1/2 user-image"
+          [src]="friend.picture.medium"
+          alt="Avatar"
+        />
+      </div>
+      <div class="col-span-3">
+        <div class="name">{{friend.first_name}} {{friend.last_name}}</div>
+        <div class="text-sm" *ngFor="let balance of friend.balance">
+          <span
+            class="text-green-500"
+            [ngClass]="{'text-red-600': balance.amount <0}"
+            >{{balance.amount | currency: balance.currency_code}}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="cursor-pointer list dark:bg-slate-800 my-4 py-3 rounded-sm border border-slate-200 dark:border-slate-700"
+    *ngFor="let group of sort(groups, 'name')"
+    [routerLink]="['/detail/group', group.id]"
+  >
+    <div class="grid grid-cols-4 grid-flow-row gap-2 text-sm">
+      <div class="flex justify-center">
+        <img
+          class="rounded-full w-1/2 user-image"
+          [src]="group.cover_photo.xxlarge"
+          alt="Avatar"
+        />
+      </div>
+      <div class="col-span-3">
+        <div class="name">{{group.name}}</div>
+        <div class="balance i_owe">
+          <span
+            class="text-green-500"
+            [ngClass]="{'text-red-600': owe.amount <0}"
+            *ngFor="let owe of getTotal(group.members)"
+          >
+            {{owe.amount | currency :owe.curreny}}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

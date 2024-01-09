@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="m-5">
+    <form [formGroup]="loginForm">
+      <div class="flex items-center justify-center h-screen">
+        <ion-item class="w-full">
+          <ion-input
+            labelPlacement="stacked"
+            formControlName="api_key"
+            label="API Key"
+          ></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="h-16">
+        <ion-button
+          [disabled]="loginForm.invalid"
+          expand="block"
+          (click)="login()"
+          >Save</ion-button
+        >
+      </div>
+    </form>
+  </div>
+</ion-content>

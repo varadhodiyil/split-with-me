@@ -1,0 +1,98 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Add new Expense </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="m-4 mt-5">
+    <form class="" [formGroup]="expenseForm">
+      <div class="grid grid-flow-row gap-5">
+        <ion-item>
+          <ion-input
+            labelPlacement="stacked"
+            mode="ios"
+            label="Enter Amount"
+            inputmode="decimal"
+            formControlName="cost"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            labelPlacement="stacked"
+            mode="ios"
+            label="Description"
+            inputmode="text"
+            formControlName="description"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-select
+            formControlName="paid_by"
+            label="Paid By"
+            label-placement="floating"
+          >
+            <ion-select-option [value]="user.id" *ngFor="let user of users"
+              >{{user.first_name}}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            labelPlacement="stacked"
+            type="date_event"
+            id="open_cal"
+            label="Date"
+            formControlName="date"
+          ></ion-input>
+          <ion-modal
+            trigger="open_cal"
+            [keepContentsMounted]="true"
+            [initialBreakpoint]="0.65"
+          >
+            <ng-template>
+              <ion-datetime
+                presentation="date"
+                mode="md"
+                [max]="maxDate"
+                [showDefaultButtons]="true"
+                (ionChange)="selectDate($event)"
+              ></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+        <div class="">
+          <ion-item *ngFor="let user of users; let i = index" lines="none">
+            <ion-checkbox
+              labelPlacement="start"
+              [checked]="user.user_selected"
+              (ionChange)="revampUsers(i,$event)"
+              >{{user.first_name}} {{user.user_split| currency :
+              'EUR'}}</ion-checkbox
+            >
+          </ion-item>
+        </div>
+      </div>
+      <div class="relative h-32 w-full">
+        <div class="absolute inset-x-0 bottom-0 h-16">
+          <ion-button
+            [disabled]="expenseForm.invalid"
+            expand="block"
+            (click)="saveForm()"
+            >Save</ion-button
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+  <ion-alert
+    [isOpen]="isAlertOpen"
+    header="Expense Invalid"
+    [message]="alertMessage"
+    [buttons]="['Ok']"
+    (didDismiss)="setOpen(false)"
+  ></ion-alert>
+</ion-content>

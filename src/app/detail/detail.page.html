@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{detailInfo?.first_name}} {{detailInfo?.name}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="scrollable">
+    <ion-list lines="none">
+      <ion-item *ngFor="let item of details; let index">
+        <div
+          class="grid min-w-full grid-cols-5 cursor-pointer grid-flow-row gap-2 text-sm dark:bg-slate-800 my-1 py-3 rounded-sm border border-slate-200 dark:border-slate-700"
+        >
+          <div class="flex justify-center">
+            <img
+              class="rounded-full w-1/2 user-image"
+              [src]="item.created_by.picture.medium"
+              alt="Avatar"
+            />
+          </div>
+          <div class="col-span-3">
+            <div class="">
+              <span>{{item.created_by.first_name}}</span>
+              <span class="text-xs text-gray-400"> Added </span>:
+              {{item.description}}
+            </div>
+            <div class="text-gray-50 text-xs">
+              {{item.date | date :'short'}}
+            </div>
+            <div class="text-sm" *ngFor="let balance of item.users">
+              <span
+                class="text-green-500"
+                [ngClass]="{'text-red-600': balance.net_balance <0}"
+                >{{balance.net_balance | currency: item.currency_code}}</span
+              >
+            </div>
+            <div class="text-xs text-gray-400" *ngIf="item.users.length === 0">
+              You're not involved
+            </div>
+          </div>
+          <div>{{item.cost | currency: item.currency_code }}</div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" [routerLink]="['/add-expense', TYPE, ID ]">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

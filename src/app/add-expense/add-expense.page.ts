@@ -19,6 +19,7 @@ export class AddExpensePage implements OnInit, OnDestroy {
   maxDate = new Date().toISOString();
   isAlertOpen = false;
   alertMessage = '';
+  alertHeader = '';
   expenseForm: FormGroup = new FormGroup({
     cost: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
@@ -98,6 +99,7 @@ export class AddExpensePage implements OnInit, OnDestroy {
     if (!incl) {
       this.alertMessage = 'Please Select atleast one user';
       this.isAlertOpen = true;
+      this.alertHeader = 'Validation Failed';
     }
 
     const formValue = this.expenseForm.value;
@@ -108,8 +110,10 @@ export class AddExpensePage implements OnInit, OnDestroy {
     this.apiService.saveExpense(this.TYPE, this.ID, formValue).subscribe({
       next: (d) => {
         this.isAlertOpen = true;
-        this.alertMessage = 'Expense Added';
+        this.alertMessage = 'Expense Added!';
+        this.alertHeader = 'Suceess';
         this.expenseForm.reset();
+        this.users.forEach((e) => (e.user_split = 0));
       },
     });
   }

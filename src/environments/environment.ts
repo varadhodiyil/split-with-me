@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  host: 'https://d245-80-233-44-136.ngrok-free.app',
+  host: 'https://fitting-highly-guinea.ngrok-free.app',
+  // host: 'http://localhost:8000',
 };
 
 /*

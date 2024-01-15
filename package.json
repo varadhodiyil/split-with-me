@@ -1,8 +1,8 @@
 {
   "name": "split-with-me",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Madhan",
+  "homepage": "https://github.com/varadhodiyil/split-with-me",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -65,5 +65,5 @@
     "ts-node": "^8.3.0",
     "typescript": "~5.2.2"
   },
-  "description": "An Ionic project"
+  "description": "Split With Me"
 }

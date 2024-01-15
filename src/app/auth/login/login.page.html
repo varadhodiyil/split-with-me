@@ -7,7 +7,7 @@
 <ion-content [fullscreen]="true">
   <div class="m-5">
     <form [formGroup]="loginForm">
-      <div class="flex items-center justify-center h-screen">
+      <div class="flex items-center justify-center h-80">
         <ion-item class="w-full">
           <ion-input
             labelPlacement="stacked"
@@ -16,13 +16,19 @@
           ></ion-input>
         </ion-item>
       </div>
-
-      <div class="h-16">
+      <div class="text-xs">
+        Please Visit
+        <a class="text-green-200" href="https://secure.splitwise.com/apps"
+          >SplitWise</a
+        >
+        to generate API key
+      </div>
+      <div class="h-16 mt-4">
         <ion-button
           [disabled]="loginForm.invalid"
           expand="block"
           (click)="login()"
-          >Save</ion-button
+          >Login</ion-button
         >
       </div>
     </form>

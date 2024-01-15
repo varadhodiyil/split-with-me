@@ -11,11 +11,21 @@ export class BasePage implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
+    const token = localStorage.getItem('AuthToken');
+
+    if (!token) {
+      this.router.navigate(['/auth/login']);
+      return;
+    }
     this.router.events.subscribe((data) => {
       if (data instanceof ActivationEnd) {
         if (data.snapshot.data['title'])
           this.title = data.snapshot.data['title'];
       }
     });
+  }
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/auth/login']);
   }
 }

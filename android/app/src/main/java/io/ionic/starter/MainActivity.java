@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package mad.split.with.me;
 
 import com.getcapacitor.BridgeActivity;
 

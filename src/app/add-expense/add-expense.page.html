@@ -90,7 +90,7 @@
   </div>
   <ion-alert
     [isOpen]="isAlertOpen"
-    header="Expense Invalid"
+    [header]="alertHeader"
     [message]="alertMessage"
     [buttons]="['Ok']"
     (didDismiss)="setOpen(false)"

@@ -42,9 +42,16 @@ class Splitwise:
         """
         headers = {"Authorization": f"Bearer {self._api_key}"}
         async with ClientSession(
-            "https://secure.splitwise.com/", timeout=ClientTimeout(5), headers=headers
+            "https://secure.splitwise.com/",
+            timeout=ClientTimeout(5),
+            headers=headers,
         ) as session:
-            result = await session.request(method.value, f"/api/v3.0{url}", data=data)
+            result = await session.request(
+                method.value,
+                f"/api/v3.0{url}",
+                data=data,
+                params=data,
+            )
             body = await result.json()
             if result.status == HTTPStatus.OK:
                 return body

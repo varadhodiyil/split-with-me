@@ -5,13 +5,20 @@ from typing import Literal
 from pydantic import BaseModel
 
 
-class GroupExpense(BaseModel):
-    """Group Expense Model."""
+class Expense(BaseModel):
+    """Base Expense Model."""
 
     cost: float
     description: str
-    details: str
+    details: str = ""
     date: datetime
-    currency_code: Literal["EUR"]
-    group_id: int
+
+    members: list[int]
     paid_by: int
+    currency_code: Literal["EUR"] = "EUR"
+
+
+class GroupExpense(Expense):
+    """Group Expense Model."""
+
+    group_id: int

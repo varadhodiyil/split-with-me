@@ -15,7 +15,7 @@ class Expense(BaseModel):
 
     members: list[int]
     paid_by: int
-    currency_code: Literal["EUR"] = "EUR"
+    currency_code: Literal["EUR", "INR", "GBP"]  = "EUR"
 
 
 class GroupExpense(Expense):

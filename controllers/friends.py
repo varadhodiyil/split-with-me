@@ -77,8 +77,9 @@ class FriendController(HTTPMethodView):
                     "details": expense["details"],
                     "date": expense["date"],
                     "currency_code": expense["currency_code"],
-                    "friendship_id": expense["friendship_id"],
+                    "friendship_id": expense.get("friendship_id", friend_id),
                     "created_by": expense["created_by"],
+                    "updated_at": expense["updated_at"],
                     "users": list(
                         filter(
                             lambda x: x["user_id"] == current_user["id"],
@@ -88,7 +89,7 @@ class FriendController(HTTPMethodView):
                 }
                 for expense in expenses["expenses"]
             ]
-
+        mapped = sorted(mapped,key=lambda x : x["updated_at"],reverse=True)
         friend_info = None
         if info_only or params["offset"] == 0:
             friend_info = (
